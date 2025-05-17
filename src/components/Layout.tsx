@@ -3,8 +3,19 @@ import { useState } from "react";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { Button } from "@/components/ui/button";
-import { Bell, List } from "lucide-react";
+import { Bell, List, Settings } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageToggle } from "@/components/LanguageToggle";
+import { useLanguage } from "@/contexts/LanguageContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -12,10 +23,11 @@ interface LayoutProps {
 
 export function Layout({ children }: LayoutProps) {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full">
+      <div className="min-h-screen flex w-full bg-slate-50 dark:bg-slate-900">
         <div className="md:block hidden">
           <AppSidebar />
         </div>
@@ -30,7 +42,7 @@ export function Layout({ children }: LayoutProps) {
         )}
         
         <div className="flex-1">
-          <header className="border-b h-16 flex items-center justify-between px-4">
+          <header className="border-b h-16 flex items-center justify-between px-4 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm">
             <div className="flex items-center gap-2">
               <Button 
                 variant="ghost" 
@@ -40,7 +52,7 @@ export function Layout({ children }: LayoutProps) {
               >
                 <List />
               </Button>
-              <h1 className="font-semibold text-xl">مدير المهام المتقدم</h1>
+              <h1 className="font-semibold text-xl">{t("common.taskManager")}</h1>
             </div>
             
             <div className="flex items-center gap-2">
@@ -48,7 +60,24 @@ export function Layout({ children }: LayoutProps) {
                 <Bell />
                 <Badge className="absolute top-0 right-0 h-5 w-5 flex items-center justify-center p-0">3</Badge>
               </Button>
-              <Button variant="outline" size="sm">اللغة العربية</Button>
+              
+              <LanguageToggle />
+              <ThemeToggle />
+              
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <Settings className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>{t("common.settings")}</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    {t("common.settings")}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </header>
           

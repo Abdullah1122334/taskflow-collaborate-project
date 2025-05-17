@@ -1,0 +1,61 @@
+
+export const translations = {
+  ar: {
+    common: {
+      dashboard: "لوحة المعلومات",
+      welcome: "مرحبًا بك في منصة إدارة المهام المتقدمة الخاصة بك. راقب تقدم مشاريعك ونظم مهامك.",
+      taskManager: "مدير المهام المتقدم",
+      notifications: "الإشعارات",
+      language: "اللغة العربية",
+      settings: "الإعدادات",
+      darkMode: "الوضع الداكن",
+      lightMode: "الوضع الفاتح",
+      english: "الإنجليزية",
+      arabic: "العربية",
+      comingSoon: "قادم قريبًا!",
+    },
+    stats: {
+      totalTasks: "إجمالي المهام",
+      completedTasks: "مهمة مكتملة",
+      upcomingDeadlines: "مواعيد قريبة",
+      withinDays: "خلال 3 أيام",
+      attachments: "المرفقات",
+      fromAllTasks: "من جميع المهام",
+      collaborators: "المتعاونون",
+      inProjects: "مشاركون في المشاريع",
+    },
+    tabs: {
+      kanban: "لوحة كانبان",
+      gantt: "مخطط جانت",
+    },
+  },
+  en: {
+    common: {
+      dashboard: "Dashboard",
+      welcome: "Welcome to your advanced task management platform. Monitor your project progress and organize your tasks.",
+      taskManager: "Advanced Task Manager",
+      notifications: "Notifications",
+      language: "English",
+      settings: "Settings",
+      darkMode: "Dark Mode",
+      lightMode: "Light Mode",
+      english: "English",
+      arabic: "Arabic",
+      comingSoon: "Coming Soon!",
+    },
+    stats: {
+      totalTasks: "Total Tasks",
+      completedTasks: "completed",
+      upcomingDeadlines: "Upcoming Deadlines",
+      withinDays: "within 3 days",
+      attachments: "Attachments",
+      fromAllTasks: "from all tasks",
+      collaborators: "Collaborators",
+      inProjects: "participating in projects",
+    },
+    tabs: {
+      kanban: "Kanban Board",
+      gantt: "Gantt Chart",
+    },
+  },
+};

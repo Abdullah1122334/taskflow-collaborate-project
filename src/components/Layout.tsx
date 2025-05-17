@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import React from "react";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { Button } from "@/components/ui/button";
@@ -22,7 +22,8 @@ interface LayoutProps {
 }
 
 export function Layout({ children }: LayoutProps) {
-  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  // Define the state with React.useState instead of destructuring directly from useState
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = React.useState(false);
   const { t } = useLanguage();
 
   return (

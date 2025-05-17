@@ -14,7 +14,7 @@ export function Layout({ children }: LayoutProps) {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   return (
-    <SidebarProvider defaultCollapsed={false}>
+    <SidebarProvider>
       <div className="min-h-screen flex w-full">
         <div className="md:block hidden">
           <AppSidebar />

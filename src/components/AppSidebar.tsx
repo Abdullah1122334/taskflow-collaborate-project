@@ -1,5 +1,4 @@
-
-import { Calendar, Check, ChartGantt, Kanban, MessageSquare, PaperClip, UserPlus } from "lucide-react";
+import { Calendar, Check, ChartGantt, Kanban, MessageSquare, Paperclip, UserPlus } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -26,7 +25,7 @@ const mainMenuItems = [
   },
   {
     title: "الملاحظات",
-    icon: PaperClip,
+    icon: Paperclip,
     url: "#",
   },
 ];

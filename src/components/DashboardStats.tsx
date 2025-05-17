@@ -1,6 +1,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check, Calendar, PaperClip, UserPlus } from "lucide-react";
+import { Check, Calendar, Paperclip, UserPlus } from "lucide-react";
 import { Task } from "./TaskCard";
 
 interface DashboardStatsProps {

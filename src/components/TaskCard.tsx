@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Calendar, Paperclip, Edit, Trash2, PriorityHigh, PriorityLow } from "lucide-react";
+import { Calendar, Paperclip, Edit, Trash2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -47,9 +47,9 @@ export function TaskCard({ task, onEdit, onDelete, onStatusChange }: TaskCardPro
   const getPriorityIcon = (priority: string) => {
     switch (priority) {
       case "low":
-        return <PriorityLow className="h-4 w-4 text-green-600" />;
+        return <span className="h-4 w-4 text-green-600">●</span>;
       case "high":
-        return <PriorityHigh className="h-4 w-4 text-red-600" />;
+        return <span className="h-4 w-4 text-red-600">●</span>;
       default:
         return null;
     }

@@ -1,99 +1,53 @@
 
 import React from "react";
-import { SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/AppSidebar";
-import { Bell, List } from "lucide-react";
+import { Bell } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageToggle } from "@/components/LanguageToggle";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Settings } from "lucide-react";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 export function Layout({ children }: LayoutProps) {
-  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = React.useState(false);
-  const { t } = useLanguage();
-
+  const { t, language } = useLanguage();
+  const isRTL = language === "ar";
+  
   return (
-    <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-slate-50 dark:bg-slate-900 animate-fade-in">
-        <div className="md:block hidden">
-          <AppSidebar />
+    <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 animate-fade-in">
+      <header className="border-b h-16 flex items-center justify-between px-6 md:px-10 bg-white/90 dark:bg-slate-800/90 shadow-sm backdrop-blur-sm sticky top-0 z-30">
+        <div className="flex items-center gap-2">
+          <h1 className="font-bold text-2xl bg-gradient-to-r from-primary to-blue-500 dark:from-blue-400 dark:to-purple-500 bg-clip-text text-transparent">
+            {t("common.taskManager")}
+          </h1>
         </div>
         
-        {/* Mobile sidebar */}
-        {isMobileSidebarOpen && (
-          <div className="fixed inset-0 bg-black/50 z-40 md:hidden" onClick={() => setIsMobileSidebarOpen(false)}>
-            <div className="w-64 h-full bg-background animate-slide-in" onClick={(e) => e.stopPropagation()}>
-              <AppSidebar />
-            </div>
-          </div>
-        )}
-        
-        <div className="flex-1">
-          <header className="border-b h-16 flex items-center justify-between px-4 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm">
-            <div className="flex items-center gap-2">
-              <Button 
-                variant="ghost" 
-                size="icon"
-                className="md:hidden"
-                onClick={() => setIsMobileSidebarOpen(true)}
-              >
-                <List />
-              </Button>
-              <h1 className="font-semibold text-xl">{t("common.taskManager")}</h1>
-            </div>
-            
-            <div className="flex items-center gap-2">
-              <Button variant="ghost" size="icon" className="relative">
-                <Bell />
-                <Badge className="absolute top-0 right-0 h-5 w-5 flex items-center justify-center p-0">3</Badge>
-              </Button>
-              
-              {/* Language Toggle */}
-              <LanguageToggle />
-              
-              {/* Theme Toggle */}
-              <ThemeToggle />
-              
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <Settings className="h-5 w-5" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>{t("common.settings")}</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>
-                    {t("common.profile")}
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    {t("common.preferences")}
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-          </header>
+        <div className="flex items-center gap-2">
+          <Button variant="ghost" size="icon" className="relative hover:bg-primary/10 rounded-full">
+            <Bell className="h-5 w-5" />
+            <Badge className="absolute top-0 right-0 h-5 w-5 flex items-center justify-center p-0">3</Badge>
+          </Button>
           
-          <main className="p-4 md:p-6">
-            {children}
-          </main>
+          <div className={`flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <LanguageToggle />
+            <ThemeToggle />
+          </div>
         </div>
-      </div>
-    </SidebarProvider>
+      </header>
+      
+      <main className={`p-6 md:p-10 max-w-7xl mx-auto ${isRTL ? 'rtl' : ''}`}>
+        {children}
+      </main>
+      
+      <footer className="py-6 px-6 md:px-10 border-t bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm mt-auto">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <p className="text-sm text-muted-foreground">
+            {t("common.taskManager")} © {new Date().getFullYear()}
+          </p>
+        </div>
+      </footer>
+    </div>
   );
 }

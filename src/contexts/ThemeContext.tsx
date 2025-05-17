@@ -12,10 +12,12 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
-    // Check for saved theme preference or system preference
     if (typeof window !== "undefined") {
       const savedTheme = localStorage.getItem("theme") as Theme | null;
-      if (savedTheme) return savedTheme;
+      
+      if (savedTheme) {
+        return savedTheme;
+      }
       
       return window.matchMedia("(prefers-color-scheme: dark)").matches 
         ? "dark" 
@@ -28,7 +30,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const handleThemeChange = (newTheme: Theme) => {
     setTheme(newTheme);
     
-    // Update class on document and localStorage
     if (typeof window !== "undefined") {
       const root = window.document.documentElement;
       root.classList.remove("light", "dark");
@@ -38,13 +39,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    // Set initial theme
     if (typeof window !== "undefined") {
       const root = window.document.documentElement;
       root.classList.remove("light", "dark");
       root.classList.add(theme);
     }
-  }, []);
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme: handleThemeChange }}>

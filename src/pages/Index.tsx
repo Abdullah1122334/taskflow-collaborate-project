@@ -1,13 +1,161 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState, useEffect } from "react";
+import { Layout } from "@/components/Layout";
+import { KanbanBoard } from "@/components/KanbanBoard";
+import { Task } from "@/components/TaskCard";
+import { DashboardStats } from "@/components/DashboardStats";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Kanban, ChartGantt } from "lucide-react";
+
+// Sample initial tasks data
+const initialTasks: Task[] = [
+  {
+    id: "1",
+    title: "تطوير واجهة المستخدم الرئيسية",
+    description: "تصميم وتطوير صفحة الويب الرئيسية لمشروع إدارة المهام",
+    priority: "high",
+    dueDate: new Date(2025, 5, 20),
+    attachments: 2,
+    collaborators: 3,
+    status: "inProgress",
+  },
+  {
+    id: "2",
+    title: "إعداد قاعدة البيانات",
+    description: "تحضير هيكل قاعدة البيانات وإعداد النماذج الأولية",
+    priority: "medium",
+    dueDate: new Date(2025, 5, 25),
+    attachments: 1,
+    collaborators: 2,
+    status: "todo",
+  },
+  {
+    id: "3",
+    title: "اختبار وظائف التسجيل",
+    description: "إجراء اختبارات شاملة لعمليات تسجيل الدخول والتسجيل الجديد",
+    priority: "low",
+    dueDate: new Date(2025, 5, 18),
+    attachments: 0,
+    collaborators: 1,
+    status: "done",
+  },
+  {
+    id: "4",
+    title: "تحسين أداء التطبيق",
+    description: "تحليل وتحسين أداء التطبيق لتقليل وقت التحميل وزيادة سرعة الاستجابة",
+    priority: "medium",
+    dueDate: new Date(2025, 5, 30),
+    attachments: 3,
+    collaborators: 2,
+    status: "todo",
+  },
+  {
+    id: "5",
+    title: "إصلاح أخطاء متعلقة بالواجهة",
+    description: "معالجة مشكلات في واجهة المستخدم على الأجهزة المحمولة",
+    priority: "high",
+    dueDate: new Date(2025, 5, 19),
+    attachments: 1,
+    collaborators: 1,
+    status: "inProgress",
+  },
+];
 
 const Index = () => {
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  useEffect(() => {
+    // Load tasks from local storage or use initial data
+    const savedTasks = localStorage.getItem('tasks');
+    if (savedTasks) {
+      try {
+        const parsedTasks = JSON.parse(savedTasks);
+        // Convert string dates back to Date objects
+        const tasksWithDates = parsedTasks.map((task: any) => ({
+          ...task,
+          dueDate: new Date(task.dueDate),
+        }));
+        setTasks(tasksWithDates);
+      } catch (error) {
+        console.error('Error parsing saved tasks:', error);
+        setTasks(initialTasks);
+      }
+    } else {
+      setTasks(initialTasks);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save tasks to local storage whenever they change
+    if (tasks.length > 0) {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+  }, [tasks]);
+
+  const handleTaskUpdate = (updatedTask: Task) => {
+    setTasks(
+      tasks.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+    );
+  };
+
+  const handleTaskCreate = (newTask: Omit<Task, "id">) => {
+    const task = {
+      ...newTask,
+      id: `task-${Math.random().toString(36).substring(2, 9)}`,
+    };
+    setTasks([...tasks, task]);
+  };
+
+  const handleTaskDelete = (id: string) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
+
+  const handleTaskStatusChange = (id: string, status: "todo" | "inProgress" | "done") => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, status } : task
+      )
+    );
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <Layout>
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold mb-2">لوحة المعلومات</h1>
+        <p className="text-muted-foreground">
+          مرحبًا بك في منصة إدارة المهام المتقدمة الخاصة بك. راقب تقدم مشاريعك ونظم مهامك.
+        </p>
       </div>
-    </div>
+
+      <DashboardStats tasks={tasks} />
+
+      <Tabs defaultValue="kanban" className="mb-8">
+        <TabsList>
+          <TabsTrigger value="kanban" className="flex items-center gap-2">
+            <Kanban className="h-4 w-4" />
+            <span>لوحة كانبان</span>
+          </TabsTrigger>
+          <TabsTrigger value="gantt" className="flex items-center gap-2">
+            <ChartGantt className="h-4 w-4" />
+            <span>مخطط جانت</span>
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="kanban" className="mt-6">
+          <KanbanBoard
+            tasks={tasks}
+            onTaskUpdate={handleTaskUpdate}
+            onTaskCreate={handleTaskCreate}
+            onTaskDelete={handleTaskDelete}
+            onStatusChange={handleTaskStatusChange}
+          />
+        </TabsContent>
+        <TabsContent value="gantt" className="mt-6">
+          <div className="flex items-center justify-center h-48 border rounded-lg">
+            <p className="text-muted-foreground">ميزة مخطط جانت قادمة قريبًا!</p>
+          </div>
+        </TabsContent>
+      </Tabs>
+    </Layout>
   );
 };
 

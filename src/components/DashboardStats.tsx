@@ -37,7 +37,7 @@ export function DashboardStats({ tasks }: DashboardStatsProps) {
     {
       title: "المرفقات",
       value: tasks.reduce((sum, task) => sum + task.attachments, 0),
-      icon: PaperClip,
+      icon: Paperclip,
       description: "من جميع المهام",
     },
     {

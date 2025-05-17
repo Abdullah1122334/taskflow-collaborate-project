@@ -2,11 +2,12 @@
 import React from "react";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
-import { Button } from "@/components/ui/button";
-import { Bell, List, Settings, Moon, Sun } from "lucide-react";
+import { Bell, List } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageToggle } from "@/components/LanguageToggle";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,28 +16,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { Settings } from "lucide-react";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 export function Layout({ children }: LayoutProps) {
-  // Define the state with React.useState instead of destructuring directly from useState
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = React.useState(false);
-  const { theme, setTheme } = useTheme();
-  const { language, setLanguage, t } = useLanguage();
-
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
-
-  const toggleLanguage = () => {
-    setLanguage(language === "ar" ? "en" : "ar");
-  };
+  const { t } = useLanguage();
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-slate-50 dark:bg-slate-900">
+      <div className="min-h-screen flex w-full bg-slate-50 dark:bg-slate-900 animate-fade-in">
         <div className="md:block hidden">
           <AppSidebar />
         </div>
@@ -70,29 +63,11 @@ export function Layout({ children }: LayoutProps) {
                 <Badge className="absolute top-0 right-0 h-5 w-5 flex items-center justify-center p-0">3</Badge>
               </Button>
               
-              {/* Language Toggle Button */}
-              <Button
-                variant="ghost"
-                size="sm"
-                className="px-2 rounded-full"
-                onClick={toggleLanguage}
-              >
-                {language === "ar" ? "English" : "العربية"}
-              </Button>
+              {/* Language Toggle */}
+              <LanguageToggle />
               
-              {/* Theme Toggle Button */}
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={toggleTheme}
-                className="rounded-full"
-              >
-                {theme === "light" ? (
-                  <Moon className="h-[1.2rem] w-[1.2rem]" />
-                ) : (
-                  <Sun className="h-[1.2rem] w-[1.2rem]" />
-                )}
-              </Button>
+              {/* Theme Toggle */}
+              <ThemeToggle />
               
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -103,11 +78,11 @@ export function Layout({ children }: LayoutProps) {
                 <DropdownMenuContent align="end">
                   <DropdownMenuLabel>{t("common.settings")}</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={toggleLanguage}>
-                    {language === "ar" ? "Switch to English" : "التبديل للعربية"}
+                  <DropdownMenuItem>
+                    {t("common.profile")}
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={toggleTheme}>
-                    {theme === "light" ? t("common.darkMode") : t("common.lightMode")}
+                  <DropdownMenuItem>
+                    {t("common.preferences")}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

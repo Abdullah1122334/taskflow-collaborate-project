@@ -15,8 +15,13 @@ export function LanguageToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="rounded-md px-3">
-          {language === "ar" ? "العربية" : "English"}
+        <Button 
+          variant="outline" 
+          size="sm" 
+          className="rounded-md flex items-center gap-2"
+        >
+          <Globe className="h-4 w-4" />
+          <span>{language === "ar" ? "العربية" : "English"}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

@@ -25,16 +25,29 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return "light";
   });
 
+  const handleThemeChange = (newTheme: Theme) => {
+    setTheme(newTheme);
+    
+    // Update class on document and localStorage
+    if (typeof window !== "undefined") {
+      const root = window.document.documentElement;
+      root.classList.remove("light", "dark");
+      root.classList.add(newTheme);
+      localStorage.setItem("theme", newTheme);
+    }
+  };
+
   useEffect(() => {
-    // Update class on document when theme changes
-    const root = window.document.documentElement;
-    root.classList.remove("light", "dark");
-    root.classList.add(theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+    // Set initial theme
+    if (typeof window !== "undefined") {
+      const root = window.document.documentElement;
+      root.classList.remove("light", "dark");
+      root.classList.add(theme);
+    }
+  }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme: handleThemeChange }}>
       {children}
     </ThemeContext.Provider>
   );

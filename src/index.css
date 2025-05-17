@@ -103,22 +103,58 @@
   }
 
   .priority-low {
-    @apply bg-green-100 text-green-800;
+    @apply bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100;
   }
 
   .priority-medium {
-    @apply bg-amber-100 text-amber-800;
+    @apply bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-100;
   }
 
   .priority-high {
-    @apply bg-red-100 text-red-800;
+    @apply bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100;
+  }
+  
+  /* Glass effect for cards */
+  .glass-card {
+    @apply bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-white/20 dark:border-slate-700/50;
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-purple-400;
+  }
+  
+  /* Improved shadows */
+  .enhanced-shadow {
+    @apply shadow-[0_4px_20px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.3)];
   }
 }
 
+/* RTL Support */
 html[dir="rtl"] .sidebar-menu-button {
   @apply flex-row-reverse justify-end;
 }
 
 html[dir="rtl"] .sidebar-menu-button span {
   @apply mr-4 ml-0;
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Transitions */
+.page-transition {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+/* Card hover effects */
+.hover-lift {
+  @apply transition-all duration-300;
+}
+
+.hover-lift:hover {
+  @apply transform -translate-y-1 shadow-md;
 }

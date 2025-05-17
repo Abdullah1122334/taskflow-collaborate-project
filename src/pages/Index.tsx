@@ -7,6 +7,7 @@ import { DashboardStats } from "@/components/DashboardStats";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Kanban, ChartGantt } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Card, CardContent } from "@/components/ui/card";
 
 // Sample initial tasks data
 const initialTasks: Task[] = [
@@ -64,7 +65,7 @@ const initialTasks: Task[] = [
 
 const Index = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   useEffect(() => {
     // Load tasks from local storage or use initial data
@@ -120,29 +121,35 @@ const Index = () => {
     );
   };
 
+  const textAlignClass = language === "ar" ? "text-right" : "text-left";
+
   return (
     <Layout>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-purple-400">{t("common.dashboard")}</h1>
-        <p className="text-muted-foreground">
-          {t("common.welcome")}
-        </p>
-      </div>
+      <Card className="mb-8 bg-gradient-to-br from-primary/10 to-accent/5 shadow-sm border dark:from-primary/5 dark:to-accent/5">
+        <CardContent className="p-6">
+          <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-purple-400">
+            {t("common.dashboard")}
+          </h1>
+          <p className={`text-muted-foreground ${textAlignClass}`}>
+            {t("common.welcome")}
+          </p>
+        </CardContent>
+      </Card>
 
       <DashboardStats tasks={tasks} />
 
-      <Tabs defaultValue="kanban" className="mb-8">
-        <TabsList className="w-full md:w-auto bg-slate-100 dark:bg-slate-800 p-1">
-          <TabsTrigger value="kanban" className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700">
+      <Tabs defaultValue="kanban" className="mb-8 mt-10">
+        <TabsList className="w-full md:w-auto bg-background border dark:border-slate-700 p-1 mb-4 rounded-lg shadow-sm">
+          <TabsTrigger value="kanban" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
             <Kanban className="h-4 w-4" />
             <span>{t("tabs.kanban")}</span>
           </TabsTrigger>
-          <TabsTrigger value="gantt" className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700">
+          <TabsTrigger value="gantt" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
             <ChartGantt className="h-4 w-4" />
             <span>{t("tabs.gantt")}</span>
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="kanban" className="mt-6">
+        <TabsContent value="kanban" className="mt-6 animate-fade-in">
           <KanbanBoard
             tasks={tasks}
             onTaskUpdate={handleTaskUpdate}
@@ -152,9 +159,11 @@ const Index = () => {
           />
         </TabsContent>
         <TabsContent value="gantt" className="mt-6">
-          <div className="flex items-center justify-center h-48 border rounded-lg bg-white dark:bg-slate-800 dark:border-slate-700">
-            <p className="text-muted-foreground">{t("common.comingSoon")}</p>
-          </div>
+          <Card className="flex items-center justify-center h-48 border rounded-lg">
+            <CardContent className="p-6 text-center">
+              <p className="text-muted-foreground">{t("common.comingSoon")}</p>
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </Layout>

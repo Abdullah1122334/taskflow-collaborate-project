@@ -17,6 +17,9 @@
     <meta name="twitter:site" content="@lovable_dev" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
     
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap">
+    
     <script>
       // This script handles the initial theme based on user preference
       (function() {
@@ -35,6 +38,24 @@
         document.documentElement.dir = savedLanguage === 'ar' ? 'rtl' : 'ltr';
       })();
     </script>
+    
+    <style>
+      /* Apply Cairo font to Arabic content */
+      html[lang="ar"] body {
+        font-family: 'Cairo', sans-serif;
+      }
+      
+      /* Add a subtle fade-in effect when page loads */
+      body {
+        opacity: 0;
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+    </style>
   </head>
 
   <body>

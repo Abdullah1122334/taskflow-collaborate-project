@@ -15,17 +15,16 @@ export function LanguageToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="rounded-full">
-          <Globe className="h-[1.2rem] w-[1.2rem]" />
-          <span className="sr-only">{t("common.language")}</span>
+        <Button variant="outline" size="sm" className="rounded-md px-3">
+          {language === "ar" ? "العربية" : "English"}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setLanguage("ar")}>
-          {t("common.arabic")}
+          العربية
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setLanguage("en")}>
-          {t("common.english")}
+          English
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

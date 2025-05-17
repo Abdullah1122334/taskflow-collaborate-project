@@ -28,6 +28,11 @@
         } else {
           document.documentElement.classList.remove('dark');
         }
+        
+        // Set the initial language and direction
+        const savedLanguage = localStorage.getItem('language') || 'ar';
+        document.documentElement.lang = savedLanguage;
+        document.documentElement.dir = savedLanguage === 'ar' ? 'rtl' : 'ltr';
       })();
     </script>
   </head>

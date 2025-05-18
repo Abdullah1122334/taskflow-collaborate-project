@@ -15,6 +15,11 @@ export const translations = {
       comingSoon: "قادم قريبًا!",
       profile: "الملف الشخصي",
       preferences: "التفضيلات",
+      noTasks: "لا توجد مهام بعد",
+      addFirstTask: "أضف مهامك الأولى للبدء في تنظيم وإدارة مشاريعك",
+      addYourFirstTask: "إضافة مهمة جديدة",
+      markAllRead: "قراءة الكل",
+      noNotifications: "لا توجد إشعارات"
     },
     stats: {
       totalTasks: "إجمالي المهام",
@@ -40,6 +45,53 @@ export const translations = {
       discussions: "المناقشات",
       views: "طريقة العرض",
     },
+    tasks: {
+      newTask: "مهمة جديدة",
+      editTask: "تعديل المهمة",
+      deleteTask: "حذف المهمة",
+      confirmDelete: "هل أنت متأكد من حذف هذه المهمة؟",
+      taskCreated: "تم إنشاء المهمة",
+      taskCreatedDesc: "تم إنشاء المهمة بنجاح",
+      taskUpdated: "تم تحديث المهمة",
+      taskUpdatedDesc: "تم تحديث المهمة بنجاح",
+      taskDeleted: "تم حذف المهمة",
+      taskDeletedDesc: "تم حذف المهمة بنجاح",
+      statusChanged: "تم تغيير حالة المهمة",
+      todo: "قيد الانتظار",
+      inProgress: "قيد التنفيذ",
+      done: "مكتمل",
+      noPendingTasks: "لا توجد مهام في قائمة الانتظار",
+      noTasksInProgress: "لا توجد مهام قيد التنفيذ",
+      noCompletedTasks: "لا توجد مهام مكتملة"
+    },
+    form: {
+      title: "عنوان المهمة",
+      description: "وصف المهمة",
+      priority: "الأولوية",
+      dueDate: "تاريخ الاستحقاق",
+      attachments: "عدد المرفقات",
+      collaborators: "عدد المتعاونين",
+      cancel: "إلغاء",
+      update: "تحديث المهمة",
+      add: "إضافة مهمة",
+      low: "منخفضة",
+      medium: "متوسطة",
+      high: "عالية",
+      selectDate: "حدد تاريخًا",
+      selectPriority: "حدد الأولوية"
+    },
+    notifications: {
+      markAllRead: "قراءة الكل",
+      noNotifications: "لا توجد إشعارات",
+      taskCreated: "تمت إضافة مهمة جديدة",
+      taskUpdated: "تم تحديث المهمة",
+      taskDeleted: "تم حذف المهمة",
+      statusChanged: "تم تغيير حالة المهمة"
+    },
+    gantt: {
+      status: "الحالة",
+      priority: "الأولوية"
+    }
   },
   en: {
     common: {
@@ -56,6 +108,11 @@ export const translations = {
       comingSoon: "Coming Soon!",
       profile: "Profile",
       preferences: "Preferences",
+      noTasks: "No Tasks Yet",
+      addFirstTask: "Add your first task to start organizing and managing your projects",
+      addYourFirstTask: "Add Your First Task",
+      markAllRead: "Mark all read",
+      noNotifications: "No notifications"
     },
     stats: {
       totalTasks: "Total Tasks",
@@ -81,5 +138,52 @@ export const translations = {
       discussions: "Discussions",
       views: "Views",
     },
+    tasks: {
+      newTask: "New Task",
+      editTask: "Edit Task",
+      deleteTask: "Delete Task",
+      confirmDelete: "Are you sure you want to delete this task?",
+      taskCreated: "Task Created",
+      taskCreatedDesc: "Task created successfully",
+      taskUpdated: "Task Updated",
+      taskUpdatedDesc: "Task updated successfully",
+      taskDeleted: "Task Deleted",
+      taskDeletedDesc: "Task deleted successfully",
+      statusChanged: "Task Status Changed",
+      todo: "To Do",
+      inProgress: "In Progress",
+      done: "Done",
+      noPendingTasks: "No pending tasks",
+      noTasksInProgress: "No tasks in progress",
+      noCompletedTasks: "No completed tasks"
+    },
+    form: {
+      title: "Task Title",
+      description: "Task Description",
+      priority: "Priority",
+      dueDate: "Due Date",
+      attachments: "Attachments",
+      collaborators: "Collaborators",
+      cancel: "Cancel",
+      update: "Update Task",
+      add: "Add Task",
+      low: "Low",
+      medium: "Medium",
+      high: "High",
+      selectDate: "Select date",
+      selectPriority: "Select priority"
+    },
+    notifications: {
+      markAllRead: "Mark all read",
+      noNotifications: "No notifications",
+      taskCreated: "New Task Added",
+      taskUpdated: "Task Updated",
+      taskDeleted: "Task Deleted",
+      statusChanged: "Task Status Changed"
+    },
+    gantt: {
+      status: "Status",
+      priority: "Priority"
+    }
   },
 };

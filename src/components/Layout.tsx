@@ -1,10 +1,9 @@
 
 import React from "react";
-import { Bell } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageToggle } from "@/components/LanguageToggle";
+import { NotificationSystem } from "@/components/NotificationSystem";
 import { Button } from "@/components/ui/button";
 
 interface LayoutProps {
@@ -25,10 +24,7 @@ export function Layout({ children }: LayoutProps) {
         </div>
         
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" className="relative hover:bg-primary/10 rounded-full">
-            <Bell className="h-5 w-5" />
-            <Badge className="absolute top-0 right-0 h-5 w-5 flex items-center justify-center p-0">3</Badge>
-          </Button>
+          <NotificationSystem />
           
           <div className={`flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
             <LanguageToggle />

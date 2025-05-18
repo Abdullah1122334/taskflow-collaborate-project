@@ -16,6 +16,14 @@ export type Notification = {
   timestamp: Date;
 };
 
+// Helper function to add a notification from anywhere
+export function addNotification(title: string, message: string): string | undefined {
+  if (typeof window !== 'undefined' && (window as any).addNotification) {
+    return (window as any).addNotification(title, message);
+  }
+  return undefined;
+}
+
 export function NotificationSystem() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [open, setOpen] = useState(false);
@@ -77,7 +85,7 @@ export function NotificationSystem() {
     }).format(date);
   };
 
-  const addNotification = (title: string, message: string) => {
+  const addNotificationHandler = (title: string, message: string) => {
     const newNotification = {
       id: `notification-${Date.now()}`,
       title,
@@ -99,7 +107,7 @@ export function NotificationSystem() {
 
   // Expose the addNotification method globally
   useEffect(() => {
-    (window as any).addNotification = addNotification;
+    (window as any).addNotification = addNotificationHandler;
     
     return () => {
       delete (window as any).addNotification;
@@ -177,15 +185,4 @@ export function NotificationSystem() {
       </Popover>
     </>
   );
-}
-
-// Export the notification type
-export { addNotification };
-
-// Helper function to add a notification from anywhere
-export function addNotification(title: string, message: string): string | undefined {
-  if (typeof window !== 'undefined' && (window as any).addNotification) {
-    return (window as any).addNotification(title, message);
-  }
-  return undefined;
 }

@@ -166,8 +166,8 @@ export function GanttChart({ tasks }: GanttChartProps) {
                   content={({ active, payload, label }) => {
                     if (active && payload && payload.length) {
                       const data = payload[0].payload;
-                      const dateKey = payload[0].dataKey;
-                      const baseDate = dateKey.split('-')[0];
+                      const dateKey = payload[0].dataKey as string;
+                      const baseDate = dateKey.toString().split('-')[0];
                       const status = data[`${baseDate}-status`];
                       const priority = data[`${baseDate}-priority`];
                       
